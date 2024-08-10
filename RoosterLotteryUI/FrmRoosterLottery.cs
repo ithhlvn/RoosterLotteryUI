@@ -7,25 +7,14 @@ namespace RoosterLotteryUI
             InitializeComponent();
         }
 
-        private void btnExit_Click(object sender, EventArgs e)
+        private void FrmRoosterLottery_Load(object sender, EventArgs e)
         {
-            var confirmResult = MessageBox.Show("Are you sure to Exit Application?",
-                                     "Confirm Exit!!",
-                                     MessageBoxButtons.YesNo);
-            if (confirmResult == DialogResult.Yes)
-            {
-                this.Close();
-            }
-            else
-            {
-                // If 'No', do something here.
-            }
+
         }
 
         private void txtPhoneNumber_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-        (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -39,8 +28,7 @@ namespace RoosterLotteryUI
 
         private void textBox1_KeyPress(object sender, KeyPressEventArgs e)
         {
-            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) &&
-        (e.KeyChar != '.'))
+            if (!char.IsControl(e.KeyChar) && !char.IsDigit(e.KeyChar) && (e.KeyChar != '.'))
             {
                 e.Handled = true;
             }
@@ -67,9 +55,18 @@ namespace RoosterLotteryUI
 
         }
 
-        private void FrmRoosterLottery_Load(object sender, EventArgs e)
+        private void btnExit_Click(object sender, EventArgs e)
         {
-
+            if (MessageBox.Show("Are you sure to Exit Application?",
+                                     "Confirm Exit!!",
+                                     MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                this.Close();
+            }
+            else
+            {
+                // If 'No', do something here.
+            }
         }
     }
 }
