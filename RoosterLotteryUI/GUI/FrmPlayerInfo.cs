@@ -7,7 +7,7 @@ namespace RoosterLotteryUI
     public partial class FrmPlayerInfo : Form
     {
         #region Fields
-        private Player CurrentPlayer = new Player();
+        private Player CurrentPlayer = new();
         #endregion
         #region Constructors
         public FrmPlayerInfo()

@@ -52,14 +52,15 @@
             label7 = new Label();
             timerTick = new System.Windows.Forms.Timer(components);
             gbBetHistory = new GroupBox();
-            dataGridView1 = new DataGridView();
+            dgvBet = new DataGridView();
+            btnAddSlot = new Button();
             gbInputInfo.SuspendLayout();
             gbBet.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudBet).BeginInit();
             gbInfo.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)nudSlot).BeginInit();
             gbBetHistory.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBet).BeginInit();
             SuspendLayout();
             // 
             // label1
@@ -171,18 +172,18 @@
             // 
             nudBet.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
             nudBet.ForeColor = Color.Red;
-            nudBet.Location = new Point(245, 49);
+            nudBet.Location = new Point(103, 80);
             nudBet.Name = "nudBet";
-            nudBet.Size = new Size(80, 25);
+            nudBet.Size = new Size(75, 25);
             nudBet.TabIndex = 0;
             // 
             // btnBet
             // 
             btnBet.BackColor = SystemColors.Control;
             btnBet.ForeColor = Color.Red;
-            btnBet.Location = new Point(251, 89);
+            btnBet.Location = new Point(251, 49);
             btnBet.Name = "btnBet";
-            btnBet.Size = new Size(95, 25);
+            btnBet.Size = new Size(89, 56);
             btnBet.TabIndex = 1;
             btnBet.Text = "&Bet";
             btnBet.UseVisualStyleBackColor = false;
@@ -191,7 +192,7 @@
             // label4
             // 
             label4.AutoSize = true;
-            label4.Location = new Point(184, 53);
+            label4.Location = new Point(6, 84);
             label4.Name = "label4";
             label4.Size = new Size(55, 15);
             label4.TabIndex = 0;
@@ -209,6 +210,7 @@
             // 
             // gbInfo
             // 
+            gbInfo.Controls.Add(btnAddSlot);
             gbInfo.Controls.Add(nudSlot);
             gbInfo.Controls.Add(nudBet);
             gbInfo.Controls.Add(btnBet);
@@ -222,7 +224,6 @@
             gbInfo.TabIndex = 1;
             gbInfo.TabStop = false;
             gbInfo.Text = "Bet info";
-            gbInfo.Enter += gbInfo_Enter;
             // 
             // nudSlot
             // 
@@ -265,7 +266,7 @@
             // gbBetHistory
             // 
             gbBetHistory.Anchor = AnchorStyles.Top | AnchorStyles.Bottom | AnchorStyles.Left | AnchorStyles.Right;
-            gbBetHistory.Controls.Add(dataGridView1);
+            gbBetHistory.Controls.Add(dgvBet);
             gbBetHistory.Location = new Point(364, 12);
             gbBetHistory.Name = "gbBetHistory";
             gbBetHistory.Size = new Size(352, 311);
@@ -273,14 +274,24 @@
             gbBetHistory.TabStop = false;
             gbBetHistory.Text = "BetHistory";
             // 
-            // dataGridView1
+            // dgvBet
             // 
-            dataGridView1.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            dataGridView1.Dock = DockStyle.Fill;
-            dataGridView1.Location = new Point(3, 19);
-            dataGridView1.Name = "dataGridView1";
-            dataGridView1.Size = new Size(346, 289);
-            dataGridView1.TabIndex = 0;
+            dgvBet.ColumnHeadersHeightSizeMode = DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            dgvBet.Dock = DockStyle.Fill;
+            dgvBet.Location = new Point(3, 19);
+            dgvBet.Name = "dgvBet";
+            dgvBet.Size = new Size(346, 289);
+            dgvBet.TabIndex = 0;
+            // 
+            // btnAddSlot
+            // 
+            btnAddSlot.Location = new Point(184, 49);
+            btnAddSlot.Name = "btnAddSlot";
+            btnAddSlot.Size = new Size(26, 23);
+            btnAddSlot.TabIndex = 2;
+            btnAddSlot.Text = "+";
+            btnAddSlot.UseVisualStyleBackColor = true;
+            btnAddSlot.Click += BtnAddSlot_Click;
             // 
             // FrmRoosterLottery
             // 
@@ -306,7 +317,7 @@
             gbInfo.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)nudSlot).EndInit();
             gbBetHistory.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)dataGridView1).EndInit();
+            ((System.ComponentModel.ISupportInitialize)dgvBet).EndInit();
             ResumeLayout(false);
         }
 
@@ -334,6 +345,7 @@
         private NumericUpDown nudSlot;
         private Label label6;
         private Label label7;
-        private DataGridView dataGridView1;
+        private DataGridView dgvBet;
+        private Button btnAddSlot;
     }
 }
