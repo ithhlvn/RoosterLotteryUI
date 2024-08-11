@@ -1,5 +1,6 @@
 using Client.Services;
 using RoosterLottery.Models;
+using System.Numerics;
 
 namespace RoosterLotteryUI
 {
@@ -77,6 +78,12 @@ namespace RoosterLotteryUI
             }
         }
 
+        private void ReloadBetHistory()
+        {
+            BetService betService = new();
+            var bets = betService.GetByPlayerId(CurrenrPlayer.Id);
+            dgvBet.DataSource = bets;
+        }
         private void SetInfo(Player? player)
         {
             if (player == null)
@@ -86,11 +93,14 @@ namespace RoosterLotteryUI
                 dtpDoB.Format = DateTimePickerFormat.Custom;
                 txtPhoneNumber.Text = null;
                 txtSearchPhone.Text = null;
+                dgvBet.DataSource = null;
                 return;
             }
+            CurrenrPlayer = player;
             txtFullName.Text = player.FullName;
             dtpDoB.Value = (DateTime)player?.DoB;
             txtPhoneNumber.Text = txtSearchPhone.Text = player.Phone;
+            ReloadBetHistory();
         }
 
         private async void BtnSearch_Click(object sender, EventArgs e)
@@ -134,18 +144,18 @@ namespace RoosterLotteryUI
             }
         }
 
-        private void BtnBet_Click(object sender, EventArgs e)
+        private async void BtnBet_Click(object sender, EventArgs e)
         {
-
             try
             {
                 if (MessageBox.Show("Are you sure to Save Bet data?", "Confirm Save!!", MessageBoxButtons.YesNo) == DialogResult.Yes)
                 {
                     BetService betService = new();
 
-                    Bet bet = new Bet { OnDate = DateTime.Now, PlayerId = CurrenrPlayer.Id, SlotId = (int)nudSlot.Value, Value = (byte)nudBet.Value, IsWin = false,  };
-
-                    await playerService.Save(player);
+                    Bet bet = new Bet { OnDate = DateTime.Now, PlayerId = CurrenrPlayer.Id, SlotId = (int)nudSlot.Value, Value = (byte)nudBet.Value, IsWin = false };
+                    await betService.Save(bet);
+                    ReloadBetHistory();
+                    MessageBox.Show("Bet Inserted Successfully!");
                 }
                 else
                 {
@@ -172,16 +182,21 @@ namespace RoosterLotteryUI
             }
         }
 
-        #endregion
-
         private void TimerTick_Tick(object sender, EventArgs e)
         {
             lblTimeTick.Text = DateTime.Now.ToString("dd:MM:yyyy HH:mm:ss");
         }
+        #endregion
 
-        private void gbInfo_Enter(object sender, EventArgs e)
+        private void BtnAddSlot_Click(object sender, EventArgs e)
         {
-
+            FrmSlot frmSlot = new();
+            using (frmSlot)
+            {
+                //this.Hide();
+                frmSlot.ShowDialog();
+                frmSlot.Dispose();
+            }
         }
     }
 }

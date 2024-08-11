@@ -60,6 +60,30 @@ namespace Client.Services
             return null;
         }
 
+        internal async Task<List<Bet?>> GetByPlayerId(int playerId)
+        {
+            var request = new RestRequest($"{nameof(GetByPlayerId)}/{playerId}", Method.Get);
+
+            RestResponse<List<Bet>> response = await _restClientBet.ExecuteAsync<List<Bet>>(request);
+
+            if (response.IsSuccessful)
+            {
+                return response.Data;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                // Handle the not found response
+                MessageBox.Show("No Bet found with the given ID.");
+            }
+            else
+            {
+                // Handle other types of unsuccessful responses
+                MessageBox.Show($"An error occurred: {response.ErrorMessage}");
+            }
+
+            return null;
+        }
+
         internal async Task<bool> Save(Bet player)
         {
             var request = new RestRequest($"{nameof(Save)}", Method.Post);
