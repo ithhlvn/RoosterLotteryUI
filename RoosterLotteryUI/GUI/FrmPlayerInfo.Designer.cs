@@ -32,6 +32,7 @@
             label1 = new Label();
             txtFullName = new TextBox();
             gbInputInfo = new GroupBox();
+            btnPlay = new Button();
             btnCancel = new Button();
             dtpDoB = new DateTimePicker();
             btnSave = new Button();
@@ -39,7 +40,6 @@
             label2 = new Label();
             txtPhoneNumber = new TextBox();
             btnExit = new Button();
-            btnPlay = new Button();
             gbInputInfo.SuspendLayout();
             SuspendLayout();
             // 
@@ -77,13 +77,23 @@
             gbInputInfo.TabStop = false;
             gbInputInfo.Text = "Player info";
             // 
+            // btnPlay
+            // 
+            btnPlay.Location = new Point(204, 115);
+            btnPlay.Name = "btnPlay";
+            btnPlay.Size = new Size(65, 23);
+            btnPlay.TabIndex = 4;
+            btnPlay.Text = "&Play";
+            btnPlay.UseVisualStyleBackColor = true;
+            btnPlay.Click += BtnPlay_Click;
+            // 
             // btnCancel
             // 
             btnCancel.Location = new Point(275, 115);
             btnCancel.Name = "btnCancel";
             btnCancel.Size = new Size(65, 23);
             btnCancel.TabIndex = 3;
-            btnCancel.Text = "Cancel";
+            btnCancel.Text = "Ca&ncel";
             btnCancel.UseVisualStyleBackColor = true;
             btnCancel.Click += BtnCancel_Click;
             // 
@@ -141,16 +151,6 @@
             btnExit.Text = "&Exit";
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += BtnExit_Click;
-            // 
-            // btnPlay
-            // 
-            btnPlay.Location = new Point(204, 115);
-            btnPlay.Name = "btnPlay";
-            btnPlay.Size = new Size(65, 23);
-            btnPlay.TabIndex = 4;
-            btnPlay.Text = "Play";
-            btnPlay.UseVisualStyleBackColor = true;
-            btnPlay.Click += BtnPlay_Click;
             // 
             // FrmPlayerInfo
             // 

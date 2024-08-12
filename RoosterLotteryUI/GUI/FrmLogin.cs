@@ -23,9 +23,14 @@ namespace RoosterLotteryUI
         {
             try
             {
-                if (keyData == (Keys.Alt | Keys.L) || keyData == Keys.Enter)
+                if (keyData == (Keys.Control | Keys.L) || keyData == Keys.Enter)
                 {
                     btnLogin.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.E))
+                {
+                    btnExit.PerformClick();
                     return true;
                 }
                 else if (keyData == (Keys.Control | Keys.Q))

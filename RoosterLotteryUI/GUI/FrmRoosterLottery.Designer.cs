@@ -41,26 +41,30 @@
             btnSearch = new Button();
             txtSearchPhone = new TextBox();
             label5 = new Label();
-            nudBet = new NumericUpDown();
+            txtBet = new NumericUpDown();
             btnBet = new Button();
             label4 = new Label();
             btnExit = new Button();
             gbInfo = new GroupBox();
-            nudSlot = new NumericUpDown();
+            btnAddSlot = new Button();
+            txtSlot = new NumericUpDown();
             label6 = new Label();
             lblTimeTick = new Label();
             label7 = new Label();
             timerTick = new System.Windows.Forms.Timer(components);
             gbBetHistory = new GroupBox();
             dgvBet = new DataGridView();
-            btnAddSlot = new Button();
+            btnLottery = new Button();
+            gbLottery = new GroupBox();
+            lblResult = new Label();
             gbInputInfo.SuspendLayout();
             gbBet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudBet).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtBet).BeginInit();
             gbInfo.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)nudSlot).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)txtSlot).BeginInit();
             gbBetHistory.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)dgvBet).BeginInit();
+            gbLottery.SuspendLayout();
             SuspendLayout();
             // 
             // label1
@@ -90,7 +94,7 @@
             gbInputInfo.Location = new Point(12, 78);
             gbInputInfo.Name = "gbInputInfo";
             gbInputInfo.Size = new Size(346, 119);
-            gbInputInfo.TabIndex = 2;
+            gbInputInfo.TabIndex = 1;
             gbInputInfo.TabStop = false;
             gbInputInfo.Text = "Player info";
             // 
@@ -168,23 +172,23 @@
             label5.TabIndex = 0;
             label5.Text = "Phone number";
             // 
-            // nudBet
+            // txtBet
             // 
-            nudBet.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            nudBet.ForeColor = Color.Red;
-            nudBet.Location = new Point(103, 80);
-            nudBet.Name = "nudBet";
-            nudBet.Size = new Size(75, 25);
-            nudBet.TabIndex = 0;
+            txtBet.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtBet.ForeColor = Color.Red;
+            txtBet.Location = new Point(103, 80);
+            txtBet.Name = "txtBet";
+            txtBet.Size = new Size(75, 25);
+            txtBet.TabIndex = 2;
             // 
             // btnBet
             // 
             btnBet.BackColor = SystemColors.Control;
             btnBet.ForeColor = Color.Red;
-            btnBet.Location = new Point(251, 49);
+            btnBet.Location = new Point(184, 80);
             btnBet.Name = "btnBet";
-            btnBet.Size = new Size(89, 56);
-            btnBet.TabIndex = 1;
+            btnBet.Size = new Size(43, 25);
+            btnBet.TabIndex = 3;
             btnBet.Text = "&Bet";
             btnBet.UseVisualStyleBackColor = false;
             btnBet.Click += BtnBet_Click;
@@ -203,7 +207,7 @@
             btnExit.Location = new Point(651, 329);
             btnExit.Name = "btnExit";
             btnExit.Size = new Size(65, 23);
-            btnExit.TabIndex = 3;
+            btnExit.TabIndex = 5;
             btnExit.Text = "&Exit";
             btnExit.UseVisualStyleBackColor = true;
             btnExit.Click += BtnExit_Click;
@@ -211,8 +215,8 @@
             // gbInfo
             // 
             gbInfo.Controls.Add(btnAddSlot);
-            gbInfo.Controls.Add(nudSlot);
-            gbInfo.Controls.Add(nudBet);
+            gbInfo.Controls.Add(txtSlot);
+            gbInfo.Controls.Add(txtBet);
             gbInfo.Controls.Add(btnBet);
             gbInfo.Controls.Add(label6);
             gbInfo.Controls.Add(lblTimeTick);
@@ -220,19 +224,29 @@
             gbInfo.Controls.Add(label4);
             gbInfo.Location = new Point(12, 203);
             gbInfo.Name = "gbInfo";
-            gbInfo.Size = new Size(346, 120);
-            gbInfo.TabIndex = 1;
+            gbInfo.Size = new Size(235, 120);
+            gbInfo.TabIndex = 2;
             gbInfo.TabStop = false;
             gbInfo.Text = "Bet info";
             // 
-            // nudSlot
+            // btnAddSlot
             // 
-            nudSlot.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
-            nudSlot.ForeColor = Color.Red;
-            nudSlot.Location = new Point(103, 49);
-            nudSlot.Name = "nudSlot";
-            nudSlot.Size = new Size(75, 25);
-            nudSlot.TabIndex = 0;
+            btnAddSlot.Location = new Point(184, 49);
+            btnAddSlot.Name = "btnAddSlot";
+            btnAddSlot.Size = new Size(43, 23);
+            btnAddSlot.TabIndex = 1;
+            btnAddSlot.Text = "+";
+            btnAddSlot.UseVisualStyleBackColor = true;
+            btnAddSlot.Click += BtnAddSlot_Click;
+            // 
+            // txtSlot
+            // 
+            txtSlot.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            txtSlot.ForeColor = Color.Red;
+            txtSlot.Location = new Point(103, 49);
+            txtSlot.Name = "txtSlot";
+            txtSlot.Size = new Size(75, 25);
+            txtSlot.TabIndex = 0;
             // 
             // label6
             // 
@@ -272,7 +286,7 @@
             gbBetHistory.Size = new Size(352, 311);
             gbBetHistory.TabIndex = 4;
             gbBetHistory.TabStop = false;
-            gbBetHistory.Text = "BetHistory";
+            gbBetHistory.Text = "Bet History";
             // 
             // dgvBet
             // 
@@ -283,21 +297,48 @@
             dgvBet.Size = new Size(346, 289);
             dgvBet.TabIndex = 0;
             // 
-            // btnAddSlot
+            // btnLottery
             // 
-            btnAddSlot.Location = new Point(184, 49);
-            btnAddSlot.Name = "btnAddSlot";
-            btnAddSlot.Size = new Size(26, 23);
-            btnAddSlot.TabIndex = 2;
-            btnAddSlot.Text = "+";
-            btnAddSlot.UseVisualStyleBackColor = true;
-            btnAddSlot.Click += BtnAddSlot_Click;
+            btnLottery.BackColor = Color.FromArgb(255, 192, 192);
+            btnLottery.Font = new Font("Segoe UI", 9.75F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            btnLottery.ForeColor = Color.Blue;
+            btnLottery.Location = new Point(6, 25);
+            btnLottery.Name = "btnLottery";
+            btnLottery.Size = new Size(93, 43);
+            btnLottery.TabIndex = 0;
+            btnLottery.Text = "&Lottery";
+            btnLottery.UseVisualStyleBackColor = false;
+            btnLottery.Click += BtnLottery_Click;
+            // 
+            // gbLottery
+            // 
+            gbLottery.Controls.Add(lblResult);
+            gbLottery.Controls.Add(btnLottery);
+            gbLottery.Location = new Point(253, 203);
+            gbLottery.Name = "gbLottery";
+            gbLottery.Size = new Size(105, 120);
+            gbLottery.TabIndex = 3;
+            gbLottery.TabStop = false;
+            gbLottery.Text = "Take Lottery";
+            // 
+            // lblResult
+            // 
+            lblResult.AutoSize = true;
+            lblResult.BorderStyle = BorderStyle.FixedSingle;
+            lblResult.Font = new Font("Segoe UI", 12F, FontStyle.Bold, GraphicsUnit.Point, 0);
+            lblResult.ForeColor = Color.Red;
+            lblResult.Location = new Point(24, 84);
+            lblResult.Name = "lblResult";
+            lblResult.Size = new Size(53, 23);
+            lblResult.TabIndex = 1;
+            lblResult.Text = "WON";
             // 
             // FrmRoosterLottery
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(728, 364);
+            Controls.Add(gbLottery);
             Controls.Add(gbBetHistory);
             Controls.Add(gbInfo);
             Controls.Add(btnExit);
@@ -307,17 +348,19 @@
             MaximizeBox = false;
             Name = "FrmRoosterLottery";
             StartPosition = FormStartPosition.CenterScreen;
-            Text = "RoosterLottery";
+            Text = "Rooster Lottery";
             gbInputInfo.ResumeLayout(false);
             gbInputInfo.PerformLayout();
             gbBet.ResumeLayout(false);
             gbBet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudBet).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtBet).EndInit();
             gbInfo.ResumeLayout(false);
             gbInfo.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)nudSlot).EndInit();
+            ((System.ComponentModel.ISupportInitialize)txtSlot).EndInit();
             gbBetHistory.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)dgvBet).EndInit();
+            gbLottery.ResumeLayout(false);
+            gbLottery.PerformLayout();
             ResumeLayout(false);
         }
 
@@ -336,16 +379,19 @@
         private Label label5;
         private DateTimePicker dtpDoB;
         private Button btnExit;
-        private NumericUpDown nudBet;
+        private NumericUpDown txtBet;
         private Button btnSearch;
         private GroupBox gbInfo;
         private Label lblTimeTick;
         private System.Windows.Forms.Timer timerTick;
         private GroupBox gbBetHistory;
-        private NumericUpDown nudSlot;
+        private NumericUpDown txtSlot;
         private Label label6;
         private Label label7;
         private DataGridView dgvBet;
         private Button btnAddSlot;
+        private Button btnLottery;
+        private GroupBox gbLottery;
+        private Label lblResult;
     }
 }

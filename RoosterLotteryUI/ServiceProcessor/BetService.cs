@@ -17,6 +17,30 @@ namespace Client.Services
             _restClientBet = new RestClient($"{Resources.ApiUrl}/api/Bet/");
         }
 
+        internal async Task<bool> Lottery(byte value)
+        {
+            var request = new RestRequest($"{nameof(Lottery)}/{value}", Method.Get);
+
+            RestResponse<bool> response = await _restClientBet.ExecuteAsync<bool>(request);
+
+            if (response.IsSuccessful)
+            {
+                return response.Data;
+            }
+            else if (response.StatusCode == System.Net.HttpStatusCode.NotFound)
+            {
+                // Handle the not found response
+                MessageBox.Show("No Result found with the given value.");
+            }
+            else
+            {
+                // Handle other types of unsuccessful responses
+                MessageBox.Show($"An error occurred: {response.ErrorMessage}");
+            }
+
+            return false;
+        }
+
         internal async Task<List<Bet?>> Load()
         {
             var request = new RestRequest($"{nameof(Load)}", Method.Get);
@@ -83,6 +107,7 @@ namespace Client.Services
 
             return null;
         }
+
 
         internal async Task<bool> Save(Bet player)
         {

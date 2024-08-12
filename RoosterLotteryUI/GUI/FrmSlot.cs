@@ -18,12 +18,38 @@ namespace RoosterLotteryUI
         public FrmSlot()
         {
             InitializeComponent();
+            InitView();
         }
         private void InitView()
         {
             mtbFrTime.Mask = "HH:mm";
             mtbToTime.Mask = "HH:mm";
         }
+
+        protected override bool ProcessCmdKey(ref Message msg, Keys keyData)
+        {
+            try
+            {
+                if (keyData == (Keys.Control | Keys.S))
+                {
+                    btnSave.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.E))
+                {
+                    btnExit.PerformClick();
+                    return true;
+                }
+                else if (keyData == (Keys.Control | Keys.Q))
+                {
+                    this.Dispose();
+                    return true;
+                }
+            }
+            catch { }
+            return base.ProcessCmdKey(ref msg, keyData);
+        }
+
         private async void BtnSave_Click(object sender, EventArgs e)
         {
             try
@@ -44,6 +70,20 @@ namespace RoosterLotteryUI
             catch
             {
                 throw;
+            }
+        }
+
+        private void BtnExit_Click(object sender, EventArgs e)
+        {
+            if (MessageBox.Show("Are you sure to Exit Application?",
+                                    "Confirm Exit!!",
+                                    MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
+            else
+            {
+                // If 'No', do something here.
             }
         }
     }
