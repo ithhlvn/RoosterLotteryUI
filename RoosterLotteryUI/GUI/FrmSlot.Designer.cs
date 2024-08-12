@@ -34,6 +34,7 @@
             label2 = new Label();
             mtbToTime = new MaskedTextBox();
             btnSave = new Button();
+            btnExit = new Button();
             groupBox1.SuspendLayout();
             SuspendLayout();
             // 
@@ -86,7 +87,7 @@
             // 
             // btnSave
             // 
-            btnSave.Location = new Point(283, 83);
+            btnSave.Location = new Point(202, 83);
             btnSave.Name = "btnSave";
             btnSave.Size = new Size(75, 23);
             btnSave.TabIndex = 1;
@@ -94,14 +95,27 @@
             btnSave.UseVisualStyleBackColor = true;
             btnSave.Click += BtnSave_Click;
             // 
+            // btnExit
+            // 
+            btnExit.Location = new Point(283, 83);
+            btnExit.Name = "btnExit";
+            btnExit.Size = new Size(75, 23);
+            btnExit.TabIndex = 2;
+            btnExit.Text = "&Exit";
+            btnExit.UseVisualStyleBackColor = true;
+            btnExit.Click += BtnExit_Click;
+            // 
             // FrmSlot
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             ClientSize = new Size(370, 118);
+            Controls.Add(btnExit);
             Controls.Add(btnSave);
             Controls.Add(groupBox1);
+            MaximizeBox = false;
             Name = "FrmSlot";
+            StartPosition = FormStartPosition.CenterScreen;
             Text = "Add Slot";
             groupBox1.ResumeLayout(false);
             groupBox1.PerformLayout();
@@ -116,5 +130,6 @@
         private Label label2;
         private MaskedTextBox mtbToTime;
         private Button btnSave;
+        private Button btnExit;
     }
 }

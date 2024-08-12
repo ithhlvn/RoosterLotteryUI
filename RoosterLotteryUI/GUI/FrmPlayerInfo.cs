@@ -31,9 +31,19 @@ namespace RoosterLotteryUI
                     btnSave.PerformClick();
                     return true;
                 }
-                if (keyData == (Keys.Control | Keys.B))
+                if (keyData == (Keys.Control | Keys.P))
                 {
-                    btnSave.PerformClick();
+                    btnPlay.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.N))
+                {
+                    btnCancel.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.E))
+                {
+                    btnExit.PerformClick();
                     return true;
                 }
                 else if (keyData == (Keys.Control | Keys.Q))

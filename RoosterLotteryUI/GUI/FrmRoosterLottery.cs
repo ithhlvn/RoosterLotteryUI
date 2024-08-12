@@ -1,4 +1,4 @@
-using Client.Services;
+﻿using Client.Services;
 using RoosterLottery.Models;
 using System.Numerics;
 
@@ -35,9 +35,29 @@ namespace RoosterLotteryUI
         {
             try
             {
-                if (keyData == (Keys.Alt | Keys.S))
+                if (keyData == (Keys.Control | Keys.S))
                 {
                     btnSearch.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.A))
+                {
+                    btnAddSlot.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.B))
+                {
+                    btnBet.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.L))
+                {
+                    btnLottery.PerformClick();
+                    return true;
+                }
+                if (keyData == (Keys.Control | Keys.E))
+                {
+                    btnExit.PerformClick();
                     return true;
                 }
                 else if (keyData == (Keys.Control | Keys.Q))
@@ -98,7 +118,7 @@ namespace RoosterLotteryUI
             }
             CurrenrPlayer = player;
             txtFullName.Text = player.FullName;
-            dtpDoB.Value = (DateTime)player?.DoB;
+            dtpDoB.Value = (DateTime)player.DoB.Value;
             txtPhoneNumber.Text = txtSearchPhone.Text = player.Phone;
             ReloadBetHistory();
         }
@@ -111,55 +131,7 @@ namespace RoosterLotteryUI
                 {
                     PlayerService playerService = new();
                     var player = await playerService.SearchPlayerByPhoneNumber(txtPhoneNumber.Text.Trim());
-                    gbInputInfo.Enabled = player != null;
                     SetInfo(player);
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        private async void BtnSave_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Are you sure to Save Player data?", "Confirm Save!!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    PlayerService playerService = new();
-
-                    Player player = new Player { FullName = txtFullName.Text.Trim(), DoB = (DateTime)dtpDoB.Value, Phone = txtPhoneNumber.Text.Trim() };
-
-                    await playerService.Save(player);
-                }
-                else
-                {
-                    // If 'No', do something here.
-                }
-            }
-            catch
-            {
-                throw;
-            }
-        }
-
-        private async void BtnBet_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (MessageBox.Show("Are you sure to Save Bet data?", "Confirm Save!!", MessageBoxButtons.YesNo) == DialogResult.Yes)
-                {
-                    BetService betService = new();
-
-                    Bet bet = new Bet { OnDate = DateTime.Now, PlayerId = CurrenrPlayer.Id, SlotId = (int)nudSlot.Value, Value = (byte)nudBet.Value, IsWin = false };
-                    await betService.Save(bet);
-                    ReloadBetHistory();
-                    MessageBox.Show("Bet Inserted Successfully!");
-                }
-                else
-                {
-                    // If 'No', do something here.
                 }
             }
             catch
@@ -186,7 +158,6 @@ namespace RoosterLotteryUI
         {
             lblTimeTick.Text = DateTime.Now.ToString("dd:MM:yyyy HH:mm:ss");
         }
-        #endregion
 
         private void BtnAddSlot_Click(object sender, EventArgs e)
         {
@@ -198,5 +169,112 @@ namespace RoosterLotteryUI
                 frmSlot.Dispose();
             }
         }
+
+        private async void BtnBet_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string strValid = CheckValidInput();
+                if (!string.IsNullOrEmpty(strValid))
+                {
+                    MessageBox.Show(strValid);
+                    return;
+                }
+                await SaveBet();
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        static int GetTimeBlock(TimeSpan time)
+        {
+            // Each hour is one block, so we can just return the hour part
+            return time.Hours;
+        }
+
+        private async Task SaveBet()
+        {
+            if (MessageBox.Show("Are you sure to Save Bet data?", "Confirm Save!!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+            {
+                try
+                {
+                    //Lấy khung thời gian hiện tại.
+                    TimeSpan currentTime = DateTime.Now.TimeOfDay;
+                    int timeBlock = GetTimeBlock(currentTime);
+                    Console.WriteLine($"The time {currentTime} falls in time block {timeBlock}.");
+
+                    //Lưu thông tin cược
+                    BetService betService = new();
+                    Bet bet = new () { OnDate = DateTime.Now, PlayerId = CurrenrPlayer.Id, SlotId = timeBlock, Value = (byte)txtBet.Value, IsWin = false };
+                    await betService.Save(bet);
+                    ReloadBetHistory();
+                    MessageBox.Show("Bet Inserted Successfully!");
+                }
+                catch (FormatException)
+                {
+                    Console.WriteLine("Invalid time format. Please enter time in HH:mm format.");
+                }
+            }
+            else
+            {
+                // If 'No', do something here.
+            }
+        }
+        /// <summary>
+        /// Xử lý quay số
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private async void BtnLottery_Click(object sender, EventArgs e)
+        {
+            string strValid = CheckValidInput();
+            if (!string.IsNullOrEmpty(strValid))
+            {
+                MessageBox.Show(strValid);
+                return;
+            }
+            try
+            {
+                if (MessageBox.Show("Are you sure to Play the Rooster Lottery game?", "Confirm Play!!", MessageBoxButtons.YesNo) == DialogResult.Yes)
+                {
+                    BetService betService = new();
+                    bool value = await betService.Lottery((byte)txtBet.Value);
+                    lblResult.Text = value ? "WON" : "LOSE";
+                    ReloadBetHistory();
+                }
+                else
+                {
+                    // If 'No', do something here.
+                }
+            }
+            catch
+            {
+                throw;
+            }
+        }
+
+        private string CheckValidInput()
+        {
+            string strRlt = string.Empty;
+            if (string.IsNullOrEmpty(txtSearchPhone.Text))
+            {
+                strRlt = "Please enter Player phone number";
+                txtSearchPhone.Focus();
+            }
+            if (string.IsNullOrEmpty(txtSlot.Text))
+            {
+                strRlt = "Please enter Slot value";
+                txtSlot.Focus();
+            }
+            if (string.IsNullOrEmpty(txtBet.Text))
+            {
+                strRlt = "Please enter Bet value";
+                txtBet.Focus();
+            }
+            return strRlt;
+        }
+        #endregion
     }
 }
