@@ -10,6 +10,7 @@ namespace RoosterLotteryUI
         private int _tickCount;
         private Player CurrenrPlayer = new();
         #endregion
+
         #region Constructors
         public FrmRoosterLottery()
         {

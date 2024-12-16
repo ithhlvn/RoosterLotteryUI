@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmLogin));
             label3 = new Label();
             txtPhoneNumber = new TextBox();
             groupBox1 = new GroupBox();
@@ -91,6 +92,7 @@
             ClientSize = new Size(370, 118);
             Controls.Add(btnExit);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FrmLogin";
             StartPosition = FormStartPosition.CenterScreen;

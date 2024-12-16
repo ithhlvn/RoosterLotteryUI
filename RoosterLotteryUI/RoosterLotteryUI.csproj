@@ -10,12 +10,18 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\RoosterLottery.ico" />
+    <None Remove="RoosterLottery.ico" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Content Include="Images\RoosterLottery.ico" />
     <Content Include="RoosterLottery.ico" />
   </ItemGroup>
 
   <ItemGroup>
-    <PackageReference Include="RestSharp" Version="111.4.1" />
-    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="111.4.1" />
+    <PackageReference Include="RestSharp" Version="112.1.0" />
+    <PackageReference Include="RestSharp.Serializers.NewtonsoftJson" Version="112.1.0" />
   </ItemGroup>
 
   <ItemGroup>

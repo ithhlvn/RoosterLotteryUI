@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(FrmSlot));
             mtbFrTime = new MaskedTextBox();
             label1 = new Label();
             groupBox1 = new GroupBox();
@@ -113,6 +114,7 @@
             Controls.Add(btnExit);
             Controls.Add(btnSave);
             Controls.Add(groupBox1);
+            Icon = (Icon)resources.GetObject("$this.Icon");
             MaximizeBox = false;
             Name = "FrmSlot";
             StartPosition = FormStartPosition.CenterScreen;
